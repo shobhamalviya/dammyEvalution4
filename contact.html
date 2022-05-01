@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="contact.html">Contact List</a></div>
+      <div><a href="favourites.html">Favourites</a></div>
+    </div>
+    <select id="sortNames" onchange="handleNameSort()">
+      <option value="">Sort By Names</option>
+      <option value="ascending">Ascending</option>
+      <option value="descending">Descending</option>
+    </select>
+
+    
+
+    <select id="filterRole" onchange="handleRoleFilter()">
+        <option value="">Select Type</option>
+        <option value="Family">Family</option>
+        <option value="Friends">Friends</option>
+        <option value="Others">Others</option>
+    </select>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Contact Name</th>
+            <th>Mobile Number</th>
+            <th>Type</th>
+            <th>Favourites</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+
+<script>
+ //code your js part here
+    //append your output to tbody
+    var information=JSON.parse(localStorage.getItem("ContactList") )
+    var favLike= JSON.parse(localStorage.getItem("favr"))||[]
+    information.forEach(function(el){
+
+    
+    var tr=document.createElement("tr")
+    
+   var td1= document.createElement("td")
+   td1.innerText=el.personName
+   var td2= document.createElement("td")
+   td2.innerText=el.personContact
+   var td3= document.createElement("td")
+   td3.innerText=el.personRelation
+   var td4= document.createElement("td")
+   td4.innerText="Favourite"
+   td4.style.color="blue"
+   td4.style.cursor="pointer"
+   td4.addEventListener("click",function(){
+functionfav(el)
+   })
+
+   tr.append(td1,td2,td3,td4)
+   document.querySelector("tbody").append(tr)
+   })
+   function functionfav(el){
+     favLike.push(el)
+     localStorage.setItem("favourites",JSON.stringify(favLike))
+     window.location.href="favourites.html"  
+   }
+   
+</script>
+</html>
